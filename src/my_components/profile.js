@@ -36,16 +36,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Profile() {
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   // eslint-disable-next-line no-console
-  //   console.log({
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
-
   const [userData, setUserData] = useState(null);
   // data pulled from the server
 
@@ -55,13 +45,6 @@ export default function Profile() {
   const [image, setImage] = useState(null);
   const [firstname, setFirstname] = useState(null);
   var my_dict = {};
-  var my_image = null;
-
-  //data to post below
-  // const [phone_number1, setPhone1] = useState(null);
-  // const [surname1, setSurname1] = useState(null);
-  // const [image1, setImage1] = useState(null);
-  // const [first_name1, setFirstName1] = useState(null);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -76,7 +59,8 @@ export default function Profile() {
   const navigate = useNavigate();
 
   const handleClick = (e) => {
-    handleSubmit(e);
+    e.preventDefault();
+    handleSubmit();
   };
   // alternatively, create an empty dict
   // onChange adds a key-value pair to the the dict
@@ -87,8 +71,8 @@ export default function Profile() {
     console.log(my_dict);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    alert(my_dict);
 
     try {
       const response = axiosInstance.patch("/users/profile/", my_dict);
@@ -104,23 +88,10 @@ export default function Profile() {
 
   //sx={{ m: 1, bgcolor: "secondary.main" }}
 
-  const handleFileChange = (event) => {
-    event.preventDefault();
-    console.log(event);
-    my_image = event.target.file[0];
-    handleFileUpload(my_image);
-  };
-
-  const handleFileUpload = (my_image) => {
-    const formData = new FormData();
-    formData.append("image", my_image, my_image.name);
-    axiosInstance.patch("/users/profile/", formData);
-  };
-
   return (
     userData && (
       <ThemeProvider theme={theme}>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -136,16 +107,6 @@ export default function Profile() {
                 src={userData.image}
                 sx={{ width: 90, height: 90 }}
               />
-
-              <Button variant="contained" component="label">
-                Change Picture
-                <input
-                  type="file"
-                  name="image"
-                  hidden
-                  onChange={(event) => handleFileChange(event)}
-                />
-              </Button>
 
               <Box component="form" noValidate sx={{ mt: 3 }}>
                 <Grid container spacing={2}>

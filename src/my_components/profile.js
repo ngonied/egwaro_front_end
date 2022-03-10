@@ -72,8 +72,6 @@ export default function Profile() {
   };
 
   const handleSubmit = () => {
-    alert(my_dict);
-
     try {
       const response = axiosInstance.patch("/users/profile/", my_dict);
       navigate("/profile/");

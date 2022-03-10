@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "./services/axiosapis";
+import SignIn from "./sign_in";
 
 class Logout extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Logout extends Component {
 
   async handleLogout() {
     try {
-      const response = await axiosInstance.post("logout/", {
+      const response = await axiosInstance.post("users/logout/", {
         refresh_token: localStorage.getItem("refresh_token"),
       });
       localStorage.removeItem("access_token");
@@ -37,8 +38,7 @@ class Logout extends Component {
   render() {
     return (
       <div>
-        <Typography variant="h2">e-Gwaro</Typography>
-        <Typography variant="h5">logging out</Typography>
+        <SignIn />
       </div>
     );
   }

@@ -44,6 +44,7 @@ import TopicDetail from "./topicdetail";
 import MyCourseCard from "./my_courses";
 import Profile from "./profile";
 import Logout from "./logout";
+import CourseDetail from "./course_detail";
 
 const drawerWidth = 240;
 
@@ -271,7 +272,7 @@ export default function Layout() {
           <Route path="logout" element={<Logout />} />
           <Route path="courses/" element={<CoursePreviewCard />} />
           <Route path="my_courses/" element={<MyCourseCard />} />
-          <Route path="courses/:course_id/" element={<TopicPreviewCard />} />
+          <Route path="courses/:course_id/" element={<CourseDetail />} />
 
           <Route path="syllabuses/" element={<SyllabusesList />} />
           <Route path="syllabuses/:syllabus/" element={<LevelsView />} />

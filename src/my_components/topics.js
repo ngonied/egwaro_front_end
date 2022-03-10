@@ -7,7 +7,7 @@ import { CardActionArea, Grid, Link } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "./services/axiosapis";
 
-export default function TopicPreviewCard() {
+export default function TopicPreviewCard(props) {
   const [topics, setTopics] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();

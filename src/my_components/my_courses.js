@@ -59,9 +59,9 @@ export default function MyCourseCard() {
                         <Typography>Subject: {course.subject_name}</Typography>
                       </CardContent>
                     </CardActionArea>
-                    <Button variant="contained" sx={{ margin: "auto" }}>
+                    {/* <Button variant="contained" sx={{ margin: "auto" }}>
                       Continue
-                    </Button>
+                    </Button> */}
                   </Card>
                 </Grid>
               )

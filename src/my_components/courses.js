@@ -8,21 +8,28 @@ import { CardActionArea, Grid, Link, Button } from "@mui/material";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import axiosInstance from "./services/axiosapis";
 
-export default function CoursePreviewCard() {
+export default function CoursePreviewCard(props) {
   const [allcourses, setAllCourses] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  //using props here to supply more dynamic roots so that components can be reused
+  // const [navigateTo, setNavigateTo] = useState(props.my_url);
 
-  // useEffect(() => {
-  //   fetch(location.pathname)
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setAllCourses(data);
-  //       console.log(allcourses);
-  //     });
-  // }, []);
+  // function getUrl(navigateTo) {
+  //   const my_url = navigateTo;
+  //   if (navigateTo) {
+  //     return my_url;
+  //   }
+  //   my_url = JSON.stringify(location.pathname);
+  //   return my_url;
+  // }
+  // if (props.my_url) {
+  //   setNavigateTo(props.my_url);
+  // } else {
+  //   setNavigateTo(location.pathname);
+  // }
+  //the whole hustle stops
+
   useEffect(() => {
     try {
       axiosInstance.get(location.pathname).then((res) => {
@@ -38,18 +45,18 @@ export default function CoursePreviewCard() {
     return coursename.slice(0, 18) + "...";
   }
 
-  function get_course_id(course) {
-    return course.id;
-  }
+  // function get_course_id(course) {
+  //   return course.id;
+  // }
 
-  function handleEnrol(event, course_name) {
-    event.preventDefault();
-    try {
-      axiosInstance.post("/enrol/", { course: course_name });
-    } catch (error) {
-      alert(error);
-    }
-  }
+  // function handleEnrol(event, course_name) {
+  //   event.preventDefault();
+  //   try {
+  //     axiosInstance.post("/enrol/", { course: course_name });
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // }
 
   return (
     allcourses && (
@@ -81,7 +88,7 @@ export default function CoursePreviewCard() {
                     <Typography>Enrolled: {course.enrolled}</Typography>
                   </CardContent>
                 </CardActionArea>
-                <Button
+                {/* <Button
                   variant="contained"
                   sx={{ margin: "auto" }}
                   onClick={(e) => handleEnrol(e, get_course_id(course))}
@@ -95,7 +102,7 @@ export default function CoursePreviewCard() {
                   // }}
                 >
                   Start Course
-                </Button>
+                </Button> */}
               </Card>
             </Grid>
           ))}

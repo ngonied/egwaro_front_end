@@ -79,46 +79,69 @@ export default function TopicDetail() {
 
   return (
     topicdetail && (
-      <div>
-        <p variant="h4">{topicdetail.name}</p>
+      <Grid container justifyContent="center" alignItems="center" spacing={2}>
         <div>
-          <YouTube videoId={topicdetail.video} xs={6} sm={6} md={6} lg={6} />
-        </div>
+          <Grid item xs={10} sm={10} md={10} lg={10}>
+            {" "}
+            <p variant="h4">{topicdetail.name}</p>
+            <div>
+              <YouTube
+                videoId={topicdetail.video}
+                xs={6}
+                sm={6}
+                md={6}
+                lg={6}
+              />
+            </div>
+          </Grid>
 
-        <Grid item className="main" xs={12} sm={12} md={12} lg={12} id="viewer">
-          <Document
-            file={topicdetail.file1}
-            onLoadSuccess={onDocumentLoadSuccess}
-            style={{ textAlign: "center" }}
+          <Grid
+            item
+            className="main"
+            xs={10}
+            sm={10}
+            md={10}
+            lg={10}
+            id="viewer"
           >
-            <Page pageNumber={pageNumber} size="A4" width={widthStyle.width} />
-          </Document>
-          <div>
-            <div className="pagec">
-              Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+            <Document
+              file={topicdetail.file1}
+              onLoadSuccess={onDocumentLoadSuccess}
+              style={{ textAlign: "center" }}
+            >
+              <Page
+                pageNumber={pageNumber}
+                size="A4"
+                width={widthStyle.width}
+              />
+            </Document>
+            <div>
+              <div className="pagec">
+                Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+              </div>
+              <div className="buttonc">
+                <Button
+                  type="button"
+                  disabled={pageNumber <= 1}
+                  onClick={previousPage}
+                  className="Pre"
+                  variant="outlined"
+                >
+                  Previous
+                </Button>
+                <Button
+                  type="button"
+                  disabled={pageNumber >= numPages}
+                  onClick={nextPage}
+                  variant="outlined"
+                >
+                  Next
+                </Button>
+              </div>
             </div>
-            <div className="buttonc">
-              <Button
-                type="button"
-                disabled={pageNumber <= 1}
-                onClick={previousPage}
-                className="Pre"
-                variant="outlined"
-              >
-                Previous
-              </Button>
-              <Button
-                type="button"
-                disabled={pageNumber >= numPages}
-                onClick={nextPage}
-                variant="outlined"
-              >
-                Next
-              </Button>
-            </div>
-          </div>
-        </Grid>
-      </div>
+          </Grid>
+        </div>
+      </Grid>
     )
   );
 }

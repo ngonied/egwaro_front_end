@@ -45,6 +45,7 @@ import MyCourseCard from "./my_courses";
 import Profile from "./profile";
 import Logout from "./logout";
 import CourseDetail from "./course_detail";
+import SubjectDetailView from "./subjectDetail";
 
 const drawerWidth = 240;
 
@@ -207,7 +208,7 @@ export default function Layout() {
 
             <ListItemText primary={"Syllabuses"} />
           </ListItem>
-          <ListItem button component={Link} to="kanji/">
+          <ListItem button component={Link} to="subjectslist/">
             <ListItemIcon>
               <Category />
             </ListItemIcon>
@@ -289,7 +290,8 @@ export default function Layout() {
             path="syllabuses/:syllabus/:id/:code/:course_id/:pk/"
             element={<TopicDetail />}
           />
-          <Route path="kanji/" element={<SubjectCard />} />
+          <Route path="subjectslist/" element={<SubjectCard />} />
+          <Route path="subjectslist/:code/" element={<SubjectDetailView />} />
           <Route
             path="*"
             element={

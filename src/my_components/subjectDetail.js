@@ -23,6 +23,33 @@ export default function SubjectDetailView(props) {
     GetSubjectData();
   }, []);
 
+  function getPostData(course) {
+    return { course: course };
+  }
+
+  function handleEnrol(event, course) {
+    event.preventDefault();
+    try {
+      axiosInstance.post("/enrol/", { course: course });
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  function EnrolButton(props) {
+    const course = props.course;
+    return (
+      <Button
+        onClick={(e) => {
+          handleEnrol(e, course);
+        }}
+        variant="contained"
+      >
+        Enrol
+      </Button>
+    );
+  }
+
   return (
     fetchedUserData && (
       <div>
@@ -48,9 +75,7 @@ export default function SubjectDetailView(props) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    Enrol
-                  </Button>
+                  <EnrolButton course={course.id} />
                 </CardActions>
               </Card>
             </Grid>
